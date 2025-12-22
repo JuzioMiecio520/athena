@@ -1,0 +1,70 @@
+$meter-height: 100px;
+$meter-width: 30px;
+
+$min-volume: #388e3c;
+$min-volume-size: 8px;
+$low-volume: #4caf50;
+$low-volume-size: $min-volume-size + 48px;
+$med-volume: #ff5722;
+$med-volume-size: $low-volume-size + 24px;
+$high-volume: #e53935;
+$high-volume-size: $med-volume-size + 10px;
+
+$meter-color: #212121;
+$volume-background-color: #ffffff;
+
+.volumeMeter {
+  height: $meter-height;
+  width: $meter-width;
+  background-color: $meter-color;
+  border-radius: 2px;
+
+  position: relative;
+
+  $meter-vertical-spacing: 3px;
+  $meter-horizontal-spacing: 3px;
+
+  $inner-height: calc(100% - #{$meter-vertical-spacing * 2});
+  $inner-width: calc(100% - #{$meter-horizontal-spacing * 2});
+
+  .meter {
+    height: $inner-height;
+    width: $inner-width;
+    margin: $meter-vertical-spacing $meter-horizontal-spacing;
+    float: left;
+
+    background: linear-gradient(
+                    to top,
+                    $min-volume 0 $min-volume-size,
+                    $low-volume 0 $low-volume-size,
+                    $med-volume 0 $med-volume-size,
+                    $high-volume 0 $high-volume-size
+    );
+  }
+
+  .overlay {
+    position: absolute;
+    top: $meter-horizontal-spacing;
+    left: $meter-horizontal-spacing;
+    // Set height between 0 and $inner-height to show volume
+    height: $inner-height / 2;
+    width: $inner-width;
+    background-color: $volume-background-color;
+  }
+
+  .grid {
+    position: absolute;
+
+    height: $inner-height;
+    width: $inner-width;
+    margin: $meter-vertical-spacing $meter-horizontal-spacing;
+    // Fixes vertical spacing issue
+    top: 1px;
+
+    background: repeating-linear-gradient(
+                    to top,
+                    #212121 0 2px,
+                    transparent 0 8px
+    );
+  }
+}
